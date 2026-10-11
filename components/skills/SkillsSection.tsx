@@ -13,7 +13,15 @@ import { cn } from "@/lib/utils";
 
 const SkillConstellationScene = dynamic(() => import("@/components/scene/SkillConstellationScene"), {
   ssr: false,
-  loading: () => null,
+  loading: () => (
+    <div aria-hidden="true" className="flex h-full flex-col items-center justify-center gap-4">
+      <span className="relative flex size-2.5">
+        <span className="absolute inline-flex size-full animate-ping rounded-full bg-cyan/50 motion-reduce:hidden" />
+        <span className="relative inline-flex size-2.5 rounded-full bg-cyan" />
+      </span>
+      <p className="font-mono text-[0.62rem] uppercase tracking-[0.24em] text-silver-dim">Charting constellation</p>
+    </div>
+  ),
 });
 
 interface Resolved {

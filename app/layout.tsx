@@ -63,6 +63,12 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning={false}>
+      <head>
+        {/* Scroll reveals start invisible; if JavaScript never runs, show them plainly. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+      </head>
       <body className="min-h-dvh">
         <Providers>{children}</Providers>
       </body>

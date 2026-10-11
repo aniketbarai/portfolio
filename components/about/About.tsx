@@ -34,6 +34,18 @@ export function About() {
             ))}
           </Reveal>
 
+          {/* Metadata rail: the facts a recruiter scans for, in one glance. */}
+          <Reveal delay={0.12}>
+            <dl className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
+              {about.facts.map((fact) => (
+                <div key={fact.label} className="bg-ink px-5 py-4">
+                  <dt className="eyebrow">{fact.label}</dt>
+                  <dd className="mt-2 text-sm leading-relaxed text-silver">{fact.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
+
           <Reveal delay={0.15}>
             <h3 className="eyebrow mb-4">Focus</h3>
             {about.focus.map((line) => (

@@ -14,6 +14,9 @@ interface RevealProps extends HTMLMotionProps<"div"> {
 export function Reveal({ delay = 0, y = 24, children, transition, ...rest }: RevealProps) {
   return (
     <motion.div
+      /* `data-reveal` lets the no-JS stylesheet in layout.tsx force this content
+         visible, so nothing is permanently hidden when scripts never run. */
+      data-reveal=""
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
