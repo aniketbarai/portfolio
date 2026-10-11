@@ -56,6 +56,23 @@ export function ProjectEmblem({ emblem, accent, className }: { emblem: Project["
           <path d="M120 60 L144 98 L120 112 L96 98 Z" stroke={stroke} strokeOpacity="0.9" />
         </g>
       ) : null}
+      {emblem === "shield" ? (
+        <g fill="none" stroke="#d6dee7" strokeOpacity="0.55">
+          <path d="M120 24 L170 44 V80 C170 106 148 122 120 130 C92 122 70 106 70 80 V44 Z" fill={`url(#em-${emblem}-${accent})`} />
+          <path d="M120 24 L120 130 M70 62 H170" strokeOpacity="0.28" />
+          <path d="M100 78 L114 92 L142 62" stroke={stroke} strokeOpacity="1" strokeWidth="2.5" />
+        </g>
+      ) : null}
+      {emblem === "pulse" ? (
+        <g fill="none" stroke="#d6dee7" strokeOpacity="0.45">
+          <path d="M34 118 H96 L106 96 L118 40 L132 118 H206" stroke={stroke} strokeOpacity="0.95" strokeWidth="2" />
+          <path d="M34 78 H78 M148 78 H206" strokeOpacity="0.3" />
+          {[40, 60, 78, 96, 118].map((x, i) => (
+            <line key={x} x1={x} y1={20 + (i % 2) * 6} x2={x} y2={130 - (i % 2) * 6} strokeOpacity="0.14" />
+          ))}
+          <circle cx="118" cy="40" r="4.5" fill={stroke} stroke="none" />
+        </g>
+      ) : null}
     </svg>
   );
 }

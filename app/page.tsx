@@ -23,7 +23,23 @@ function jsonLd() {
         email: `mailto:${profile.email}`,
         url: SITE_URL,
         sameAs: [profile.github, ...(profile.linkedin ? [profile.linkedin] : [])],
-        knowsAbout: ["React", "Next.js", "Node.js", "Express.js", "MongoDB", "TypeScript", "JavaScript", "Java", "Python"],
+        ...(profile.location
+          ? { address: { "@type": "PostalAddress", addressLocality: profile.location } }
+          : {}),
+        knowsAbout: [
+          "React",
+          "Next.js",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+          "Supabase",
+          "TypeScript",
+          "JavaScript",
+          "Java",
+          "Python",
+          "Tailwind CSS",
+          "Three.js",
+        ],
       },
       {
         "@type": "WebSite",

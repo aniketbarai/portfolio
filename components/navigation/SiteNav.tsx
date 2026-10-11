@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { navigation, profile } from "@/data/portfolio";
@@ -16,6 +17,7 @@ export function SiteNav() {
   const [open, setOpen] = useState(false);
   const menuId = useId();
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const router = useRouter();
 
   // Compact the bar once the hero has been left behind.
   useEffect(() => {
@@ -57,9 +59,11 @@ export function SiteNav() {
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
+  /* Sections live on the home page. When this nav is rendered elsewhere (a
+     case-study route) the lookup fails and we route home to the anchor instead. */
   const go = (id: SectionId) => {
     setOpen(false);
-    scrollToSection(id);
+    if (!scrollToSection(id)) router.push(`/#${id}`);
   };
 
   return (

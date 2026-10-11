@@ -1,7 +1,10 @@
+import { GraduationCap } from "lucide-react";
+import { education } from "@/data/portfolio";
+import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Timeline } from "./Timeline";
 
-/** Experience: real projects, client work and problem-solving milestones, from verified records. */
+/** Experience: real projects, client work, leadership and problem-solving milestones, from verified records. */
 export function ExperienceSection() {
   return (
     <section id="experience" aria-labelledby="experience-title" className="relative border-t border-line py-28 md:py-36">
@@ -16,8 +19,32 @@ export function ExperienceSection() {
                 Shipping software, <span className="text-cyan">and learning in public.</span>
               </>
             }
-            description="A timeline of client work, team projects and problem-solving milestones. Dates reflect the public record on GitHub."
+            description="A timeline of client work, team projects, leadership and problem-solving milestones. Dates reflect the public record on GitHub."
           />
+
+          <Reveal delay={0.15} className="mt-14">
+            <h3 className="eyebrow flex items-center gap-3">
+              <GraduationCap aria-hidden="true" className="size-4 text-cyan" />
+              Education
+            </h3>
+            <ol className="mt-5 space-y-4">
+              {education.map((entry) => (
+                <li key={entry.id} className="glass rounded-2xl p-5">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                    <span className="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-cyan">{entry.period}</span>
+                    {entry.status === "current" ? (
+                      <span className="rounded-full border border-lime/40 px-2.5 py-0.5 font-mono text-[0.6rem] uppercase tracking-[0.16em] text-lime">
+                        In progress
+                      </span>
+                    ) : null}
+                  </div>
+                  <p className="mt-3 font-sans text-base font-medium text-silver">{entry.qualification}</p>
+                  <p className="mt-1 text-sm text-mist">{entry.institution}</p>
+                  {entry.detail ? <p className="mt-3 text-sm leading-relaxed text-silver-dim">{entry.detail}</p> : null}
+                </li>
+              ))}
+            </ol>
+          </Reveal>
         </div>
         <div>
           <Timeline />

@@ -14,8 +14,21 @@ import { ProjectDetail } from "./ProjectDetail";
 
 const ProjectGalleryScene = dynamic(() => import("@/components/scene/ProjectGalleryScene"), {
   ssr: false,
-  loading: () => null,
+  loading: () => <ScenePlaceholder label="Assembling spatial gallery" />,
 });
+
+/** Shown only while the 3D chunk downloads; the panel keeps its height, so nothing shifts. */
+function ScenePlaceholder({ label }: { label: string }) {
+  return (
+    <div aria-hidden="true" className="flex h-full flex-col items-center justify-center gap-4">
+      <span className="relative flex size-2.5">
+        <span className="absolute inline-flex size-full animate-ping rounded-full bg-cyan/50 motion-reduce:hidden" />
+        <span className="relative inline-flex size-2.5 rounded-full bg-cyan" />
+      </span>
+      <p className="font-mono text-[0.62rem] uppercase tracking-[0.24em] text-silver-dim">{label}</p>
+    </div>
+  );
+}
 
 /**
  * Projects: a spatial 3D gallery on desktop (with keyboard-accessible tabs and a

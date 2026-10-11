@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
-import { Download, Mail } from "lucide-react";
+import { Download, Mail, MapPin, Phone } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa6";
 import { profile } from "@/data/portfolio";
@@ -55,6 +55,28 @@ export function ContactSection() {
                   <span className="text-sm">{profile.email}</span>
                 </a>
               </li>
+              {profile.phone ? (
+                <li>
+                  <a href={`tel:${profile.phone.replace(/\s+/g, "")}`} className="group flex items-center justify-between gap-4 py-4 text-silver hover:text-cyan focus-visible:text-cyan">
+                    <span className="flex items-center gap-4">
+                      <Phone aria-hidden="true" className="size-4 text-silver-dim group-hover:text-cyan" />
+                      <span className="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-silver-dim">Phone</span>
+                    </span>
+                    <span className="text-sm">{profile.phone}</span>
+                  </a>
+                </li>
+              ) : null}
+              {profile.location ? (
+                <li>
+                  <div className="flex items-center justify-between gap-4 py-4">
+                    <span className="flex items-center gap-4">
+                      <MapPin aria-hidden="true" className="size-4 text-silver-dim" />
+                      <span className="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-silver-dim">Location</span>
+                    </span>
+                    <span className="text-sm text-silver">{profile.location}</span>
+                  </div>
+                </li>
+              ) : null}
               <li>
                 <ExternalLinkRow href={profile.github} icon={<SiGithub aria-hidden="true" className="size-4" />} label="GitHub" value={profile.github.replace("https://", "")} />
               </li>

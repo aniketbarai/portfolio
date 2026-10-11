@@ -19,7 +19,7 @@ export function Footer() {
           <ul className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-silver-dim">
             {navigation.map((item) => (
               <li key={item.id}>
-                <a href={`#${item.id}`} className="link-underline hover:text-cyan focus-visible:text-cyan">
+                <a href={`/#${item.id}`} className="link-underline hover:text-cyan focus-visible:text-cyan">
                   {item.label}
                 </a>
               </li>

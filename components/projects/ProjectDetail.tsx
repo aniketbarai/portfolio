@@ -1,4 +1,5 @@
-import { Globe } from "lucide-react";
+import Link from "next/link";
+import { FileText, Globe, Lock } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import type { Project } from "@/data/types";
 import { ExternalLink } from "@/components/ui/ExternalLink";
@@ -12,8 +13,12 @@ export function ProjectDetail({ project, compact = false, className }: { project
       <p className="eyebrow flex flex-wrap items-center gap-x-3 gap-y-1">
         <span>{project.category}</span>
         <span aria-hidden="true" className="text-line-strong">/</span>
-        <span>{project.year}</span>
-        <span aria-hidden="true" className="text-line-strong">/</span>
+        {project.year ? (
+          <>
+            <span>{project.year}</span>
+            <span aria-hidden="true" className="text-line-strong">/</span>
+          </>
+        ) : null}
         <span className={project.source === "owned" ? "text-cyan" : "text-lime"}>{teamLabel}</span>
       </p>
 
@@ -68,16 +73,30 @@ export function ProjectDetail({ project, compact = false, className }: { project
       </div>
 
       <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3 border-t border-line pt-6">
-        <a
-          href={project.github}
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          href={`/work/${project.slug}`}
           className="link-underline inline-flex items-center gap-2 text-sm text-silver hover:text-cyan focus-visible:text-cyan"
         >
-          <SiGithub aria-hidden="true" className="size-4" />
-          GitHub repository
-          <span className="sr-only">(opens in a new tab)</span>
-        </a>
+          <FileText aria-hidden="true" className="size-4" />
+          Full case study
+        </Link>
+        {project.github ? (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-underline inline-flex items-center gap-2 text-sm text-silver hover:text-cyan focus-visible:text-cyan"
+          >
+            <SiGithub aria-hidden="true" className="size-4" />
+            GitHub repository
+            <span className="sr-only">(opens in a new tab)</span>
+          </a>
+        ) : (
+          <span className="inline-flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-silver-dim">
+            <Lock aria-hidden="true" className="size-3.5" />
+            Source not published
+          </span>
+        )}
         {project.live ? (
           <a
             href={project.live}

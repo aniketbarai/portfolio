@@ -11,10 +11,12 @@ import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import type { PointerState } from "@/components/scene/HeroScene";
 import { HeroFallback } from "./HeroFallback";
 
-/* The 3D bundle (three.js, R3F, drei) is split out and loaded only on WebGL-capable clients. */
+/* The 3D bundle (three.js, R3F, drei) is split out and loaded only on WebGL-capable
+   clients. While it downloads, the static composition holds the viewport so the hero
+   is never an empty rectangle. */
 const HeroScene = dynamic(() => import("@/components/scene/HeroScene"), {
   ssr: false,
-  loading: () => null,
+  loading: () => <HeroFallback className="absolute inset-0" />,
 });
 
 /**
