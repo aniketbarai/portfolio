@@ -4,12 +4,19 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Timeline } from "./Timeline";
 
-/** Experience: real projects, client work, leadership and problem-solving milestones, from verified records. */
+/**
+ * Experience: real projects, client work, leadership and problem-solving
+ * milestones, plus education.
+ *
+ * Grid placement is explicit so the reading order stays correct on small
+ * screens (heading → timeline → education) while the wider layout keeps
+ * education beneath the sticky heading beside the timeline.
+ */
 export function ExperienceSection() {
   return (
     <section id="experience" aria-labelledby="experience-title" className="relative border-t border-line py-28 md:py-36">
-      <div className="mx-auto grid max-w-7xl gap-16 px-6 md:px-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-        <div className="lg:sticky lg:top-32 lg:self-start">
+      <div className="flex flex-col gap-16 md:px-10 lg:grid lg:grid-cols-[0.8fr_1.2fr] lg:gap-x-20 lg:gap-y-12">
+        <div className="px-6 md:px-0 lg:col-start-1 lg:row-start-1 lg:sticky lg:top-32 lg:self-start">
           <SectionHeader
             index="04"
             eyebrow="Experience"
@@ -21,13 +28,19 @@ export function ExperienceSection() {
             }
             description="A timeline of client work, team projects, leadership and problem-solving milestones. Dates reflect the public record on GitHub."
           />
+        </div>
 
-          <Reveal delay={0.15} className="mt-14">
+        <div className="px-6 md:px-0 lg:col-start-2 lg:row-span-2 lg:row-start-1">
+          <Timeline />
+        </div>
+
+        <div className="px-6 md:px-0 lg:col-start-1 lg:row-start-2">
+          <Reveal>
             <h3 className="eyebrow flex items-center gap-3">
               <GraduationCap aria-hidden="true" className="size-4 text-cyan" />
               Education
             </h3>
-            <ol className="mt-5 space-y-4">
+            <ol className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
               {education.map((entry) => (
                 <li key={entry.id} className="glass rounded-2xl p-5">
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
@@ -45,9 +58,6 @@ export function ExperienceSection() {
               ))}
             </ol>
           </Reveal>
-        </div>
-        <div>
-          <Timeline />
         </div>
       </div>
     </section>
